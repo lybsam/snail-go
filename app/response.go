@@ -1,9 +1,9 @@
 package app
 
 import (
-	"charon/pkg/e"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"snail/pkg/e"
 )
 
 type Gin struct {

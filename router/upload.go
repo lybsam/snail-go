@@ -3,10 +3,12 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 	"snail/app"
 	"snail/pkg/e"
 	"snail/pkg/logging"
 	"snail/pkg/upload"
+	"snail/pkg/util"
 )
 
 func UploadImage(c *gin.Context) {
@@ -50,4 +52,14 @@ func UploadImage(c *gin.Context) {
 		"url":      upload.GetImageFullUrl(imageName),
 		"save_url": savePath + imageName,
 	})
+}
+
+func DelImage(c *gin.Context) {
+	at, v := util.GetAnalysis(c, 1, "fn")
+	remove := os.Remove(v[0])
+	if remove != nil {
+		at.Resp(false, remove)
+		return
+	}
+	at.Resp(true, nil)
 }

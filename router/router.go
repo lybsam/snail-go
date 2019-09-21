@@ -1,10 +1,10 @@
 package router
 
 import (
-	"charon/pkg/upload"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"snail/pkg/jwt"
+	"snail/pkg/upload"
 )
 
 type HttpType int32
@@ -32,6 +32,7 @@ func (this *SRouter) SnailRouters() *gin.Engine {
 	sapi.Use(jwt.JWT())
 	sr.StaticFS("upload/images", http.Dir(upload.GetImageFullPath()))
 	sapi.POST("/upload", UploadImage)
+	sapi.DELETE("/file/:fn", DelImage)
 	this.Listener.With(this)
 	return sr
 }

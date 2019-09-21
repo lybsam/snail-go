@@ -1,8 +1,8 @@
 package app
 
 import (
-	"charon/pkg/logging"
 	"github.com/astaxie/beego/validation"
+	"snail/pkg/logging"
 )
 
 // MarkErrors logs error logs

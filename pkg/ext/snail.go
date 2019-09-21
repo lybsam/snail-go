@@ -7,7 +7,7 @@ import (
 )
 
 func FindsExt(v interface{}, page int, sql string, args ...interface{}) bool {
-	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args, 0).
+	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args...).
 		Order("-created_on").
 		Limit(setting.Conf.PageSize).
 		Offset(setting.Conf.PageSize * page).
@@ -25,7 +25,7 @@ func FindExt(v interface{}, page int) bool {
 }
 
 func FirstExt(v interface{}, sql string, args ...interface{}) bool {
-	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args, 0).First(v).Error
+	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args...).First(v).Error
 	return IsErrorExt(e)
 }
 
@@ -35,7 +35,7 @@ func CreateExt(v interface{}) bool {
 }
 
 func DelExt(v interface{}, sql string, args ...interface{}) bool {
-	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args, 0).Delete(v).Error
+	e := model.So().Where(fmt.Sprintf("%s AND deleted_on = ?", sql), args...).Delete(v).Error
 	return IsErrorExt(e)
 }
 
