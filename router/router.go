@@ -31,8 +31,8 @@ func (this *SRouter) SnailRouters() *gin.Engine {
 	sapi = sr.Group(this.Path + this.GPath)
 	sapi.Use(jwt.JWT())
 	sr.StaticFS("upload/images", http.Dir(upload.GetImageFullPath()))
-	sapi.POST("/upload", UploadImage)
-	sapi.DELETE("/file/:fn", DelImage)
+	sapi.POST("/file", UploadImage)
+	sapi.DELETE("/file", DelImage)
 	this.Listener.With(this)
 	return sr
 }

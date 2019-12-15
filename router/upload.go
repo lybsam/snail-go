@@ -1,12 +1,14 @@
 package router
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"snail/app"
 	"snail/pkg/e"
 	"snail/pkg/logging"
+	"snail/pkg/setting"
 	"snail/pkg/upload"
 	"snail/pkg/util"
 )
@@ -55,8 +57,8 @@ func UploadImage(c *gin.Context) {
 }
 
 func DelImage(c *gin.Context) {
-	at, v := util.GetAnalysis(c, 1, "fn")
-	remove := os.Remove(v[0])
+	at, v := util.GetAnalysis(c, 2, "fileName")
+	remove := os.Remove(fmt.Sprintf("%s%s", setting.RUNTIME_ROOT_PATH, v[0]))
 	if remove != nil {
 		at.Resp(false, remove)
 		return
